@@ -1,0 +1,57 @@
+<div class="background">
+  <div class="overlay position-absolute w-100 h-100"></div>
+  <div class="container h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+        <div class="content text-center text-white mb-4">
+          <h1 class="display-4">Encontre o emprego dos seus sonhos</h1>
+          <p class="lead">Utilize nossa ferramenta de pesquisa avançada para encontrar as melhores oportunidades.</p>
+        </div>
+        <div class="search-form-container bg-transparent rounded-lg p-4">
+          <form [formGroup]="searchForm" (ngSubmit)="showSearchSyntax()">
+            <mat-form-field class="w-100 mb-3" appearance="fill">
+              <mat-label>Cargo</mat-label>
+              <input matInput formControlName="cargo" placeholder="Ex: Desenvolvedor">
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mb-3" appearance="fill">
+              <mat-label>Linguagens</mat-label>
+              <input matInput formControlName="linguagens" placeholder="Ex: React, Node">
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mb-3" appearance="fill">
+              <mat-label>Modelo</mat-label>
+              <mat-select formControlName="modelo">
+                <mat-option value="">Nenhum</mat-option>
+                <mat-option value="Hibrido">Híbrido</mat-option>
+                <mat-option value="Remote">Remote</mat-option>
+                <mat-option value="Presencial">Presencial</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mb-3" appearance="fill">
+              <mat-label>Senioridade</mat-label>
+              <mat-select formControlName="senioridade">
+                <mat-option value="">Nenhuma</mat-option>
+                <mat-option value="Jr">Jr</mat-option>
+                <mat-option value="Pleno">Pleno</mat-option>
+                <mat-option value="Senior">Sênior</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 mb-4" appearance="fill">
+              <mat-label>Não gostaria de:</mat-label>
+              <input matInput formControlName="escolhanegativa" placeholder="Ex: Java, Senior">
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" class="btn btn-primary btn-block" type="submit">Gerar Pesquisa</button>
+          </form>
+        </div>
+        <div class="search-syntax-container bg-transparent rounded-lg p-4 mt-4" *ngIf="searchSyntax">
+          <textarea class="form-control" [value]="searchSyntax" readonly></textarea>
+          <button mat-raised-button color="primary" class="btn btn-primary btn-block mt-3" (click)="generateLinkedInSearch()">Procurar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
