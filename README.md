@@ -1,6 +1,6 @@
 # Boolean Hunter
 
-![Boolean Hunter Logo](https://files.oaiusercontent.com/file-z2JPQScNYGSw2p27SlEstCX0?se=2024-03-28T18%3A37%3A03Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D299%2C%20immutable&rscd=attachment%3B%20filename%3Dboleeanhunter.png&sig=VqYvYYMCbh7SC4G75vYdDOieciUMUPg4jaJ%2By3OyhOU%3D)
+![Boolean Hunter Logo](https://files.oaiusercontent.com/file-z2JPQScNYGSw2p27SlEstCX0?se=2024-03-28T21%3A11%3A50Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D299%2C%20immutable&rscd=attachment%3B%20filename%3Dboleeanhunter.png&sig=wzzX6L75/MsKc69zlDkvwd4OQ9fe7v/RXXVZM7NkSGw%3D)
 
 Deploy: https://booleanhunter.vercel.app/
 
