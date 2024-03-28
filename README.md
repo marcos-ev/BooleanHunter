@@ -2,6 +2,8 @@
 
 ![Boolean Hunter Logo](https://files.oaiusercontent.com/file-z2JPQScNYGSw2p27SlEstCX0?se=2024-03-28T18%3A37%3A03Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D299%2C%20immutable&rscd=attachment%3B%20filename%3Dboleeanhunter.png&sig=VqYvYYMCbh7SC4G75vYdDOieciUMUPg4jaJ%2By3OyhOU%3D)
 
+Deploy: https://booleanhunter.vercel.app/
+
 
 Boolean Hunter is a search tool designed to generate boolean search queries for job search platforms like LinkedIn. It allows users to input various search parameters such as job title, programming languages, remote work availability, and more, and then generates a boolean search string that can be used to refine job search results.
 
