@@ -8,11 +8,30 @@
   justify-content: flex-start;
   align-items: center;
   position: relative;
-  padding-top: 10vh;
+  padding-top: 4vh;
+}
+
+.author {
+  color: rgba(255, 255, 255, 0.7); 
+  text-align: center; 
+  bottom: 1vh; 
+  margin-top: 3vh;
+  position: relative; /* Adiciona posição relativa para definir z-index */
+  z-index: 1; /* Ajusta o z-index para garantir que o link seja clicável */
+}
+
+.author a {
+  color: rgba(255, 255, 255, 0.7); 
+  text-decoration: none; 
+  cursor: pointer; 
+}
+
+.author a:hover {
+  text-decoration: underline; 
 }
 
 .overlay {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0;
   left: 0;
@@ -28,6 +47,7 @@
   z-index: 2;
   padding: 0 1rem;
 }
+
 
 .search-form-container,
 .search-syntax-container {
@@ -67,6 +87,8 @@ button {
   }
 }
 
+
+
 @media only screen and (max-width: 768px) {
   .search-form-container,
   .search-syntax-container {
@@ -82,6 +104,11 @@ button {
   button {
     font-size: 0.9rem;
   }
+
+  .author {
+    margin-top: 2vh; /* Altera a margem superior do autor */
+    bottom: 0.5vh; /* Ajusta a posição vertical do autor */
+  }
 }
 
 @media only screen and (max-width: 480px) {
@@ -89,6 +116,11 @@ button {
     padding-top: 15vh;
     padding-left: 5%;
     padding-right: 5%;
+  }
+
+  .author {
+    margin-top: 1vh; /* Altera a margem superior do autor */
+    bottom: 0.3vh; /* Ajusta a posição vertical do autor */
   }
 
   .form-control {

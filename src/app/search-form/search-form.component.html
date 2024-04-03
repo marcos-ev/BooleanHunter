@@ -4,7 +4,8 @@
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-sm-10 col-md-8 col-lg-6">
         <div class="content text-center text-white mb-4">
-          <h1 class="display-4">Encontre o emprego dos seus sonhos</h1>
+          <h1 class="display-4">Boolean Hunter</h1>
+          <h3 class="display-4">Encontre o emprego dos seus sonhos!</h3>
           <p class="lead">Utilize nossa ferramenta de pesquisa avançada para encontrar as melhores oportunidades.</p>
         </div>
         <div class="search-form-container bg-transparent rounded-lg p-4">
@@ -51,7 +52,9 @@
         <div class="search-syntax-container bg-transparent rounded-lg p-4 mt-4" *ngIf="searchSyntax">
           <textarea class="form-control" [value]="searchSyntax" readonly></textarea>
           <button mat-raised-button color="primary" class="btn btn-primary btn-block mt-3" (click)="generateLinkedInSearch()">Procurar</button>
+          
         </div>
+        <p class="author">Desenvolvido por <a href="https://www.linkedin.com/in/marcos-eduardo-virgili/" target="_blank">&#64;Marcos Eduardo - 2024</a></p>
       </div>
     </div>
   </div>
