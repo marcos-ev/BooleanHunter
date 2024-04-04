@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchFormComponent } from './search-form/search-form.component';
+import { Analytics } from "@vercel/analytics/react"
+
 
 // Importações do Angular Material
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,11 +24,11 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule, // Adicione ReactiveFormsModule aos imports
-    MatFormFieldModule, // Adicione MatFormFieldModule aos imports
-    MatInputModule, // Adicione MatInputModule aos imports
-    MatSelectModule, // Adicione MatSelectModule aos imports
-    MatButtonModule // Adicione MatButtonModule aos imports
+    ReactiveFormsModule, 
+    MatFormFieldModule,
+    MatInputModule, 
+    MatSelectModule, 
+    MatButtonModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
