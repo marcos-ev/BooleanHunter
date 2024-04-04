@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Analytics } from "@vercel/analytics/react"
+
 
 @Component({
   selector: 'app-search-form',
