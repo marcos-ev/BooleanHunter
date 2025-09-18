@@ -3,7 +3,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #915D96 0%, #37024E 100%);
+  background: linear-gradient(135deg, #766B89 0%, #190340 100%);
   background-attachment: fixed;
   position: relative;
 }
@@ -61,6 +61,18 @@
 .header-content {
   max-width: 600px;
   margin: 0 auto;
+}
+
+.language-switcher-fixed {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+
+  @media (max-width: 768px) {
+    top: 15px;
+    right: 15px;
+  }
 }
 
 .logo-section {

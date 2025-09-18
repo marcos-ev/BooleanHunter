@@ -6,6 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchFormComponent } from './search-form/search-form.component';
+import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
+import { TranslatePipe } from './pipes/translate.pipe';
+import { TranslationService } from './services/translation.service';
 import { Analytics } from "@vercel/analytics/react"
 
 
@@ -16,11 +19,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    LanguageSwitcherComponent,
+    TranslatePipe
   ],
   imports: [
     BrowserModule,
@@ -33,9 +39,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatMenuModule
   ],
-  providers: [],
+  providers: [TranslationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,9 @@
 <div class="app-container">
+  <!-- Language Switcher - Fixed Position -->
+  <div class="language-switcher-fixed">
+    <app-language-switcher></app-language-switcher>
+  </div>
+
   <!-- Header Section -->
   <header class="header">
     <div class="header-content">
@@ -6,9 +11,9 @@
         <div class="logo-icon">
           <span class="material-icons">search</span>
         </div>
-        <h1 class="app-title">Boolean Hunter</h1>
+        <h1 class="app-title">{{ 'app.title' | translate }}</h1>
       </div>
-      <p class="app-subtitle">Encontre o emprego dos seus sonhos com busca inteligente</p>
+      <p class="app-subtitle">{{ 'app.subtitle' | translate }}</p>
     </div>
   </header>
 
@@ -20,20 +25,20 @@
         <button mat-stroked-button class="quick-action-btn" (click)="loadTemplate('frontend')"
           [disabled]="isGenerating">
           <span class="material-icons">web</span>
-          Frontend
+          {{ 'quick.frontend' | translate }}
         </button>
         <button mat-stroked-button class="quick-action-btn" (click)="loadTemplate('backend')" [disabled]="isGenerating">
           <span class="material-icons">storage</span>
-          Backend
+          {{ 'quick.backend' | translate }}
         </button>
         <button mat-stroked-button class="quick-action-btn" (click)="loadTemplate('fullstack')"
           [disabled]="isGenerating">
           <span class="material-icons">developer_mode</span>
-          Full Stack
+          {{ 'quick.fullstack' | translate }}
         </button>
         <button mat-stroked-button class="quick-action-btn" (click)="loadTemplate('data')" [disabled]="isGenerating">
           <span class="material-icons">analytics</span>
-          Data Science
+          {{ 'quick.data' | translate }}
         </button>
       </div>
 
@@ -42,18 +47,19 @@
         <div class="card-header">
           <h2 class="card-title">
             <span class="material-icons">tune</span>
-            Configure sua busca
-            <span class="field-count">{{ getFilledFieldsCount() }}/5 campos preenchidos</span>
+            {{ 'form.title' | translate }}
+            <span class="field-count">{{ getFilledFieldsCount() }}/5 {{ 'form.fields_filled' | translate }}</span>
           </h2>
-          <p class="card-description">Preencha os campos abaixo para gerar uma busca booleana otimizada</p>
+          <p class="card-description">{{ 'form.description' | translate }}</p>
         </div>
 
         <form [formGroup]="searchForm" (ngSubmit)="showSearchSyntax()" class="search-form">
           <!-- Cargo Field -->
           <div class="form-group">
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Cargo desejado</mat-label>
-              <input matInput formControlName="cargo" placeholder="Ex: Desenvolvedor Frontend" autocomplete="off">
+              <mat-label>{{ 'form.job.label' | translate }}</mat-label>
+              <input matInput formControlName="cargo" [placeholder]="'form.job.placeholder' | translate"
+                autocomplete="off">
               <mat-icon matSuffix>work</mat-icon>
             </mat-form-field>
           </div>
@@ -61,8 +67,8 @@
           <!-- Linguagens Field -->
           <div class="form-group">
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Tecnologias/Linguagens</mat-label>
-              <input matInput formControlName="linguagens" placeholder="Ex: React, TypeScript, Node.js"
+              <mat-label>{{ 'form.tech.label' | translate }}</mat-label>
+              <input matInput formControlName="linguagens" [placeholder]="'form.tech.placeholder' | translate"
                 autocomplete="off">
               <mat-icon matSuffix>code</mat-icon>
             </mat-form-field>
@@ -71,12 +77,12 @@
           <!-- Modelo de Trabalho -->
           <div class="form-group">
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Modelo de trabalho</mat-label>
+              <mat-label>{{ 'form.model.label' | translate }}</mat-label>
               <mat-select formControlName="modelo">
-                <mat-option value="">Qualquer modelo</mat-option>
-                <mat-option value="Hibrido">Híbrido</mat-option>
-                <mat-option value="Remote">Remoto</mat-option>
-                <mat-option value="Presencial">Presencial</mat-option>
+                <mat-option value="">{{ 'form.model.any' | translate }}</mat-option>
+                <mat-option value="Hibrido">{{ 'form.model.hybrid' | translate }}</mat-option>
+                <mat-option value="Remote">{{ 'form.model.remote' | translate }}</mat-option>
+                <mat-option value="Presencial">{{ 'form.model.onsite' | translate }}</mat-option>
               </mat-select>
               <mat-icon matSuffix>location_on</mat-icon>
             </mat-form-field>
@@ -85,13 +91,13 @@
           <!-- Senioridade -->
           <div class="form-group">
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Nível de senioridade</mat-label>
+              <mat-label>{{ 'form.seniority.label' | translate }}</mat-label>
               <mat-select formControlName="senioridade">
-                <mat-option value="">Qualquer nível</mat-option>
-                <mat-option value="Estágio">Estágio</mat-option>
-                <mat-option value="Junior">Júnior</mat-option>
-                <mat-option value="Pleno">Pleno</mat-option>
-                <mat-option value="Senior">Sênior</mat-option>
+                <mat-option value="">{{ 'form.seniority.any' | translate }}</mat-option>
+                <mat-option value="Estágio">{{ 'form.seniority.intern' | translate }}</mat-option>
+                <mat-option value="Junior">{{ 'form.seniority.junior' | translate }}</mat-option>
+                <mat-option value="Pleno">{{ 'form.seniority.mid' | translate }}</mat-option>
+                <mat-option value="Senior">{{ 'form.seniority.senior' | translate }}</mat-option>
               </mat-select>
               <mat-icon matSuffix>trending_up</mat-icon>
             </mat-form-field>
@@ -100,8 +106,8 @@
           <!-- Exclusões -->
           <div class="form-group">
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Excluir termos</mat-label>
-              <input matInput formControlName="escolhanegativa" placeholder="Ex: Java, Senior, Presencial"
+              <mat-label>{{ 'form.exclude.label' | translate }}</mat-label>
+              <input matInput formControlName="escolhanegativa" [placeholder]="'form.exclude.placeholder' | translate"
                 autocomplete="off">
               <mat-icon matSuffix>block</mat-icon>
             </mat-form-field>
@@ -112,7 +118,7 @@
             [disabled]="searchForm.invalid || isGenerating">
             <span class="material-icons" *ngIf="!isGenerating">search</span>
             <span class="material-icons pulse" *ngIf="isGenerating">hourglass_empty</span>
-            {{ isGenerating ? 'Gerando busca...' : 'Gerar Busca Booleana' }}
+            {{ isGenerating ? ('form.submit.loading' | translate) : ('form.submit' | translate) }}
           </button>
         </form>
       </div>
@@ -248,28 +254,28 @@
     <div class="tips-card">
       <h3>
         <span class="material-icons">lightbulb</span>
-        Dicas para uma busca eficiente
+        {{ 'tips.title' | translate }}
       </h3>
       <div class="tips-grid">
         <div class="tip-item">
           <span class="material-icons">search</span>
           <div>
-            <h4>Use aspas</h4>
-            <p>Coloque termos exatos entre aspas: "React Developer"</p>
+            <h4>{{ 'tips.quotes.title' | translate }}</h4>
+            <p>{{ 'tips.quotes.description' | translate }}</p>
           </div>
         </div>
         <div class="tip-item">
           <span class="material-icons">add</span>
           <div>
-            <h4>Combine termos</h4>
-            <p>Use AND para incluir, OR para alternativas</p>
+            <h4>{{ 'tips.combine.title' | translate }}</h4>
+            <p>{{ 'tips.combine.description' | translate }}</p>
           </div>
         </div>
         <div class="tip-item">
           <span class="material-icons">block</span>
           <div>
-            <h4>Exclua termos</h4>
-            <p>Use NOT para remover resultados indesejados</p>
+            <h4>{{ 'tips.exclude.title' | translate }}</h4>
+            <p>{{ 'tips.exclude.description' | translate }}</p>
           </div>
         </div>
       </div>
@@ -280,7 +286,7 @@
   <footer class="footer">
     <div class="footer-content">
       <p class="footer-text">
-        Desenvolvido com ❤️ por
+        {{ 'footer.developed' | translate }}
         <a href="https://www.linkedin.com/in/marcos-eduardo-virgili/" target="_blank" rel="noopener noreferrer"
           class="footer-link">
           @Marcos Eduardo
@@ -290,11 +296,11 @@
       <div class="footer-stats">
         <span class="stat-item">
           <span class="material-icons">search</span>
-          {{ totalSearches }} buscas geradas
+          {{ totalSearches }} {{ 'footer.stats.searches' | translate }}
         </span>
         <span class="stat-item">
           <span class="material-icons">favorite</span>
-          {{ savedSearches }} favoritas
+          {{ savedSearches }} {{ 'footer.stats.saved' | translate }}
         </span>
       </div>
     </div>
