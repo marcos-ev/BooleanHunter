@@ -122,7 +122,8 @@
 
 // Cards
 .search-card,
-.results-card {
+.results-card,
+.progress-card {
   background: var(--bg-primary);
   border-radius: var(--border-radius-xl);
   box-shadow: var(--shadow-xl);
@@ -253,16 +254,6 @@
 }
 
 // Progress Card
-.progress-card {
-  background: var(--bg-primary);
-  border-radius: var(--border-radius-xl);
-  box-shadow: var(--shadow-xl);
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  animation: slideUp 0.6s ease-out;
-}
-
 .progress-content {
   padding: var(--spacing-2xl);
   text-align: center;
@@ -306,23 +297,7 @@
   animation: progressGlow 2s ease-in-out infinite;
 }
 
-@keyframes progressGlow {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.7;
-  }
-}
-
 // Results Card
-.results-card {
-  animation: slideUp 0.6s ease-out;
-}
-
 .search-syntax-container {
   padding: var(--spacing-xl);
 }
@@ -772,6 +747,18 @@
 
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes progressGlow {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
   }
 }
 
