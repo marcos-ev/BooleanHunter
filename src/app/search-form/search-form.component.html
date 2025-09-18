@@ -1,61 +1,302 @@
-<div class="background">
-  <div class="overlay position-absolute w-100 h-100"></div>
-  <div class="container h-100">
-    <div class="row justify-content-center align-items-center h-100">
-      <div class="col-12 col-sm-10 col-md-8 col-lg-6">
-        <div class="content text-center text-white mb-4">
-          <h1 class="display-4">Boolean Hunter</h1>
-          <h3 class="display-4">Encontre o emprego dos seus sonhos!</h3>
-          <p class="lead">Utilize nossa ferramenta de pesquisa avançada para encontrar as melhores oportunidades.</p>
+<div class="app-container">
+  <!-- Header Section -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-icon">
+          <span class="material-icons">search</span>
         </div>
-        <div class="search-form-container bg-transparent rounded-lg p-4">
-          <form [formGroup]="searchForm" (ngSubmit)="showSearchSyntax()">
-            <mat-form-field class="w-100 mb-3" appearance="fill">
-              <mat-label>Cargo</mat-label>
-              <input matInput formControlName="cargo" placeholder="Ex: Desenvolvedor">
-            </mat-form-field>
+        <h1 class="app-title">Boolean Hunter</h1>
+      </div>
+      <p class="app-subtitle">Encontre o emprego dos seus sonhos com busca inteligente</p>
+    </div>
+  </header>
 
-            <mat-form-field class="w-100 mb-3" appearance="fill">
-              <mat-label>Linguagens</mat-label>
-              <input matInput formControlName="linguagens" placeholder="Ex: React, Node">
-            </mat-form-field>
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="form-container">
+      <!-- Quick Actions Bar -->
+      <div class="quick-actions" *ngIf="!searchSyntax">
+        <button mat-stroked-button class="quick-action-btn" (click)="loadTemplate('frontend')"
+          [disabled]="isGenerating">
+          <span class="material-icons">web</span>
+          Frontend
+        </button>
+        <button mat-stroked-button class="quick-action-btn" (click)="loadTemplate('backend')" [disabled]="isGenerating">
+          <span class="material-icons">storage</span>
+          Backend
+        </button>
+        <button mat-stroked-button class="quick-action-btn" (click)="loadTemplate('fullstack')"
+          [disabled]="isGenerating">
+          <span class="material-icons">developer_mode</span>
+          Full Stack
+        </button>
+        <button mat-stroked-button class="quick-action-btn" (click)="loadTemplate('data')" [disabled]="isGenerating">
+          <span class="material-icons">analytics</span>
+          Data Science
+        </button>
+      </div>
 
-            <mat-form-field class="w-100 mb-3" appearance="fill">
-              <mat-label>Modelo</mat-label>
+      <!-- Search Form Card -->
+      <div class="search-card" [@cardAnimation]>
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="material-icons">tune</span>
+            Configure sua busca
+            <span class="field-count">{{ getFilledFieldsCount() }}/5 campos preenchidos</span>
+          </h2>
+          <p class="card-description">Preencha os campos abaixo para gerar uma busca booleana otimizada</p>
+        </div>
+
+        <form [formGroup]="searchForm" (ngSubmit)="showSearchSyntax()" class="search-form">
+          <!-- Cargo Field -->
+          <div class="form-group">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Cargo desejado</mat-label>
+              <input matInput formControlName="cargo" placeholder="Ex: Desenvolvedor Frontend" autocomplete="off">
+              <mat-icon matSuffix>work</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <!-- Linguagens Field -->
+          <div class="form-group">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Tecnologias/Linguagens</mat-label>
+              <input matInput formControlName="linguagens" placeholder="Ex: React, TypeScript, Node.js"
+                autocomplete="off">
+              <mat-icon matSuffix>code</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <!-- Modelo de Trabalho -->
+          <div class="form-group">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Modelo de trabalho</mat-label>
               <mat-select formControlName="modelo">
-                <mat-option value="">Nenhum</mat-option>
+                <mat-option value="">Qualquer modelo</mat-option>
                 <mat-option value="Hibrido">Híbrido</mat-option>
-                <mat-option value="Remote">Remote</mat-option>
+                <mat-option value="Remote">Remoto</mat-option>
                 <mat-option value="Presencial">Presencial</mat-option>
               </mat-select>
+              <mat-icon matSuffix>location_on</mat-icon>
             </mat-form-field>
+          </div>
 
-            <mat-form-field class="w-100 mb-3" appearance="fill">
-              <mat-label>Senioridade</mat-label> 
+          <!-- Senioridade -->
+          <div class="form-group">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Nível de senioridade</mat-label>
               <mat-select formControlName="senioridade">
-                <mat-option value="">Nenhuma</mat-option>
+                <mat-option value="">Qualquer nível</mat-option>
                 <mat-option value="Estágio">Estágio</mat-option>
-                <mat-option value="Junior">Jr</mat-option>
+                <mat-option value="Junior">Júnior</mat-option>
                 <mat-option value="Pleno">Pleno</mat-option>
                 <mat-option value="Senior">Sênior</mat-option>
               </mat-select>
+              <mat-icon matSuffix>trending_up</mat-icon>
             </mat-form-field>
+          </div>
 
-            <mat-form-field class="w-100 mb-4" appearance="fill">
-              <mat-label>Não gostaria de:</mat-label>
-              <input matInput formControlName="escolhanegativa" placeholder="Ex: Java, Senior">
+          <!-- Exclusões -->
+          <div class="form-group">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Excluir termos</mat-label>
+              <input matInput formControlName="escolhanegativa" placeholder="Ex: Java, Senior, Presencial"
+                autocomplete="off">
+              <mat-icon matSuffix>block</mat-icon>
             </mat-form-field>
+          </div>
 
-            <button mat-raised-button color="primary" class="btn btn-primary btn-block" type="submit">Gerar Pesquisa</button>
-          </form>
+          <!-- Submit Button -->
+          <button mat-raised-button color="primary" type="submit" class="submit-button"
+            [disabled]="searchForm.invalid || isGenerating">
+            <span class="material-icons" *ngIf="!isGenerating">search</span>
+            <span class="material-icons pulse" *ngIf="isGenerating">hourglass_empty</span>
+            {{ isGenerating ? 'Gerando busca...' : 'Gerar Busca Booleana' }}
+          </button>
+        </form>
+      </div>
+
+      <!-- Progress Card -->
+      <div class="progress-card" *ngIf="isGenerating" [@slideUp]>
+        <div class="progress-content">
+          <div class="progress-icon">
+            <span class="material-icons pulse">search</span>
+          </div>
+          <h3>Gerando sua busca...</h3>
+          <p>Analisando critérios e otimizando resultados</p>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="progressValue"></div>
+          </div>
         </div>
-        <div class="search-syntax-container bg-transparent rounded-lg p-4 mt-4" *ngIf="searchSyntax">
-          <textarea class="form-control" [value]="searchSyntax" readonly></textarea>
-          <button mat-raised-button color="primary" class="btn btn-primary btn-block mt-3" (click)="generateLinkedInSearch()">Procurar</button>
-          
+      </div>
+
+      <!-- Results Card -->
+      <div class="results-card" *ngIf="searchSyntax && !isGenerating" [@slideUp]>
+        <div class="card-header">
+          <h3 class="card-title">
+            <span class="material-icons">content_copy</span>
+            Sua busca gerada
+            <span class="search-stats">{{ getSearchStats() }}</span>
+          </h3>
+          <p class="card-description">Copie a busca abaixo ou clique para pesquisar no LinkedIn</p>
         </div>
-        <p class="author">Desenvolvido por <a href="https://www.linkedin.com/in/marcos-eduardo-virgili/" target="_blank">&#64;Marcos Eduardo - 2024</a></p>
+
+        <div class="search-syntax-container">
+          <div class="syntax-display">
+            <code class="syntax-text">{{ searchSyntax }}</code>
+            <button mat-icon-button class="copy-button" (click)="copyToClipboard()"
+              [matTooltip]="copySuccess ? 'Copiado!' : 'Copiar busca'" [class.success]="copySuccess">
+              <span class="material-icons" *ngIf="!copySuccess">content_copy</span>
+              <span class="material-icons" *ngIf="copySuccess">check</span>
+            </button>
+          </div>
+
+          <div class="action-buttons">
+            <button mat-stroked-button color="primary" (click)="generateLinkedInSearch()" class="action-button">
+              <span class="material-icons">open_in_new</span>
+              Buscar no LinkedIn
+            </button>
+
+            <button mat-stroked-button (click)="saveSearch()" class="action-button save-button">
+              <span class="material-icons">bookmark</span>
+              Salvar busca
+            </button>
+
+            <button mat-stroked-button (click)="clearForm()" class="action-button secondary">
+              <span class="material-icons">refresh</span>
+              Nova busca
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Save Search Modal -->
+  <div class="modal-overlay" *ngIf="showSaveDialog" (click)="cancelSaveSearch()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>
+          <span class="material-icons">bookmark</span>
+          Salvar busca
+        </h3>
+        <button mat-icon-button (click)="cancelSaveSearch()" class="close-button">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p>Dê um nome para sua busca para encontrá-la facilmente depois:</p>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nome da busca</mat-label>
+          <input matInput [(ngModel)]="searchName" placeholder="Ex: Desenvolvedor Frontend - Pleno - Remote"
+            maxlength="50">
+          <mat-hint>{{ searchName.length }}/50 caracteres</mat-hint>
+        </mat-form-field>
+
+        <div class="search-preview">
+          <strong>Preview da busca:</strong>
+          <code>{{ searchSyntax }}</code>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button mat-stroked-button (click)="cancelSaveSearch()" class="cancel-btn">
+          Cancelar
+        </button>
+        <button mat-raised-button color="primary" (click)="confirmSaveSearch()" [disabled]="!searchName.trim()"
+          class="save-btn">
+          <span class="material-icons">save</span>
+          Salvar
+        </button>
       </div>
     </div>
   </div>
+
+  <!-- Saved Searches Section -->
+  <div class="saved-searches-section" *ngIf="savedSearchesList.length > 0">
+    <div class="saved-searches-card">
+      <h3>
+        <span class="material-icons">bookmark</span>
+        Suas buscas salvas ({{ savedSearches }})
+      </h3>
+      <div class="saved-searches-list">
+        <div class="saved-search-item" *ngFor="let search of savedSearchesList">
+          <div class="search-info">
+            <h4>{{ search.name }}</h4>
+            <p class="search-date">{{ formatDate(search.createdAt) }}</p>
+            <code class="search-syntax">{{ search.syntax }}</code>
+          </div>
+          <div class="search-actions">
+            <button mat-icon-button (click)="loadSavedSearch(search)" matTooltip="Usar esta busca">
+              <span class="material-icons">play_arrow</span>
+            </button>
+            <button mat-icon-button (click)="deleteSavedSearch(search.id)" matTooltip="Excluir busca"
+              class="delete-btn">
+              <span class="material-icons">delete</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tips Section -->
+  <div class="tips-section" *ngIf="!searchSyntax && savedSearchesList.length === 0">
+    <div class="tips-card">
+      <h3>
+        <span class="material-icons">lightbulb</span>
+        Dicas para uma busca eficiente
+      </h3>
+      <div class="tips-grid">
+        <div class="tip-item">
+          <span class="material-icons">search</span>
+          <div>
+            <h4>Use aspas</h4>
+            <p>Coloque termos exatos entre aspas: "React Developer"</p>
+          </div>
+        </div>
+        <div class="tip-item">
+          <span class="material-icons">add</span>
+          <div>
+            <h4>Combine termos</h4>
+            <p>Use AND para incluir, OR para alternativas</p>
+          </div>
+        </div>
+        <div class="tip-item">
+          <span class="material-icons">block</span>
+          <div>
+            <h4>Exclua termos</h4>
+            <p>Use NOT para remover resultados indesejados</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="footer-text">
+        Desenvolvido com ❤️ por
+        <a href="https://www.linkedin.com/in/marcos-eduardo-virgili/" target="_blank" rel="noopener noreferrer"
+          class="footer-link">
+          @Marcos Eduardo
+        </a>
+        - 2024
+      </p>
+      <div class="footer-stats">
+        <span class="stat-item">
+          <span class="material-icons">search</span>
+          {{ totalSearches }} buscas geradas
+        </span>
+        <span class="stat-item">
+          <span class="material-icons">favorite</span>
+          {{ savedSearches }} favoritas
+        </span>
+      </div>
+    </div>
+  </footer>
 </div>
